@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/nonogram_provider.dart';
 import '../widgets/nonogram.dart';
+import '../widgets/wordinput.dart';
 
 class Home extends StatelessWidget {
 
@@ -11,21 +12,21 @@ class Home extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Nonogram'),),
-      body: FutureBuilder<bool>(
-        future: _nonogramProvider.getNonogram(),
-        builder: (ctx,sn) => sn.connectionState == ConnectionState.waiting
-          ? CircularProgressIndicator()
-          : Consumer<NonogramProvider>(builder: (ctx,data,_) => Column(
-              //crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                NonogramWidget(word: data.nonogram.word)
-                // Text(data.nonogram.id.toString()),
-                // Text(data.nonogram.word)
-              ],
-            )
+      body: SingleChildScrollView(
+        child: FutureBuilder<bool>(
+          future: _nonogramProvider.getNonogram(),
+          builder: (ctx,sn) => sn.connectionState == ConnectionState.waiting
+            ? CircularProgressIndicator()
+            : Consumer<NonogramProvider>(builder: (ctx,data,_) => Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  NonogramWidget(word: data.nonogram.word),
+                  const WordInput(),
+                ],
+              )
+            ),
           ),
-        ),
+      ),
     );
   }
 }

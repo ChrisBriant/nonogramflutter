@@ -8,7 +8,7 @@ class NonogramProvider with ChangeNotifier {
 
   Nonogram? _nonogram;
 
-
+  //API CALLS
   Future<bool> getNonogram() async {
     Map<String, String> _headers = {
         'Authorization' : Environment().apiKey,
@@ -28,6 +28,13 @@ class NonogramProvider with ChangeNotifier {
     }
   }
 
+  Future<bool> sendWords(wordString) async {
+    print('Sending Words');
+    print(wordString);
+    return true;
+  }
+
+  //GET METHODS
   get nonogram {
     return _nonogram;
   }
