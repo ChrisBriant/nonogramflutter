@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/nonogram_provider.dart';
 import '../widgets/nonogram.dart';
 import '../widgets/wordinput.dart';
+import '../widgets/appdrawer.dart';
 
 class Home extends StatelessWidget {
 
@@ -12,11 +13,12 @@ class Home extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Nonogram'),),
+      drawer: AppDrawer(),
       body: SingleChildScrollView(
         child: FutureBuilder<bool>(
           future: _nonogramProvider.getNonogram(),
           builder: (ctx,sn) => sn.connectionState == ConnectionState.waiting
-            ? CircularProgressIndicator()
+            ? const CircularProgressIndicator()
             : Consumer<NonogramProvider>(builder: (ctx,data,_) => Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

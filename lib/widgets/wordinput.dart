@@ -29,10 +29,6 @@ class _WordInputState extends State<WordInput> {
     8 : RegExp(r'\b\w{8}\b',multiLine: true),
     9 : RegExp(r'\b\w{9}\b',multiLine: true),
   };
-  // final Timer _timer = Timer.periodic(Duration(seconds: 3), (timer) { 
-  //       print('three seconds passed');
-  //       print(_wordsString);
-  // });
 
   _saveForm() {
     print('Form saves here');
@@ -44,22 +40,6 @@ class _WordInputState extends State<WordInput> {
     }
   
   }
-
-  //Takes the letter and returns true if it is in the nonogram
-  // bool _checkWordValid(String letter,String word, {bool valid = true}) {
-  //   if(word.isEmpty || !valid) {
-  //     return valid; 
-  //   }
-  //   bool validWord = valid; 
-  //   int letterIndex = word.characters.toList().indexWhere((element) => element == letter);
-  //   String newWord = word;
-  //   try {
-  //     String newWord = word.characters.toList().removeAt(letterIndex);
-  //   } catch(err) {
-  //     validWord = false;
-  //   }
-  //   return _checkWordValid(letter, newWord,valid: validWord);
-  // }
 
 
 bool _checkWordInWord(String word1, String word2) {
@@ -99,14 +79,12 @@ bool _checkWordInWord(String word1, String word2) {
     String testStr = '3';
     String nonogramWord = _nonogramProvider!.nonogram.word;
 
-    //RegExp(r'\b\w{3}\b',multiLine: true);
-
 
     for(int i=3;i<10;i++) {
       //final String regExStr = '\b\\w{$i}\b';
       final RegExp? regEx = regExMap[i];
       print('$i letter matches');
-      regEx!.allMatches(wordText).forEach((word) { 
+      regEx!.allMatches(wordText.toLowerCase()).forEach((word) { 
         bool validWord = true; 
         // word.group(0).toString().characters.forEach((letter) {  
         //   if(!nonogramWord.contains(letter)) {
@@ -117,6 +95,7 @@ bool _checkWordInWord(String word1, String word2) {
         if(_checkWordInWord(word.group(0).toString(), nonogramWord)) {
           //Add the word
           print(word.group(0));
+          _nonogramProvider!.addNLetterWord(i,word.group(0).toString());
         } else {
           print('INVALID ${word.group(0)}');
         }

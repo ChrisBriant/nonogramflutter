@@ -21,7 +21,19 @@ class NonogramProvider with ChangeNotifier {
     if(_res.statusCode == 200) {
       //Set the nonogram data
       final _responseData = json.decode(_res.body);
-      _nonogram = Nonogram(id: _responseData['id'], word: _responseData['word']);
+      _nonogram = Nonogram(
+        id: _responseData['id'], 
+        word: _responseData['word'],
+        foundWords: {
+          3 : [],
+          4 : [],
+          5 : [],
+          6 : [],
+          7 : [],
+          8 : [],
+          9 : [],
+        }
+      );
       return true;
     }  else {
       return false;
@@ -34,18 +46,31 @@ class NonogramProvider with ChangeNotifier {
     return true;
   }
 
+  addNLetterWord(int i,String word) {
+    List<String>? _wordList = _nonogram!.foundWords![i];
+
+    if(!_wordList!.contains(word)) {
+      _wordList.add(word);
+    }
+    _nonogram!.foundWords![i] = _wordList;
+    notifyListeners();
+  }
+
   //GET METHODS
   get nonogram {
     return _nonogram;
   }
 }
 
+
 class Nonogram {
   int id;
   String word;
+  Map<int,List<String>>? foundWords;
 
   Nonogram({
     required this.id,
-    required this.word
+    required this.word,
+    this.foundWords,
   });
 }
