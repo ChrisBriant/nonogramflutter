@@ -36,78 +36,72 @@ class ResultsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10,),
             !wordResults.firstWhere((element) => element.numLetters == 3).scoredWords.isEmpty
-            ? Column(
-              children: [
-                const Text(
-                  '3 Letter Words',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                WordListDisplay(wordList: wordResults.firstWhere((element) => element.numLetters == 3).scoredWords)
-              ],
-            )
+            ? ResultDisplay(letterCount: 3, wordScore: wordResults.firstWhere((element) => element.numLetters == 3))
             : const SizedBox.shrink(),
             !wordResults.firstWhere((element) => element.numLetters == 4).scoredWords.isEmpty
-            ? Column(
-              children: [
-                const Text(
-                  '4 Letter Words',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                
-                ),
-                WordListDisplay(wordList: wordResults.firstWhere((element) => element.numLetters ==4).scoredWords)
-              ],
-            )
+            ? ResultDisplay(letterCount: 4, wordScore: wordResults.firstWhere((element) => element.numLetters == 4))
             : const SizedBox.shrink(),
             !wordResults.firstWhere((element) => element.numLetters == 5).scoredWords.isEmpty
-            ? Column(
-              children: [
-                const Text('5 Letter Words'),
-                WordListDisplay(wordList: wordResults.firstWhere((element) => element.numLetters == 5).scoredWords)
-              ],
-            )
+            ? ResultDisplay(letterCount: 5, wordScore: wordResults.firstWhere((element) => element.numLetters == 5))
             : const SizedBox.shrink(),
-                        !wordResults.firstWhere((element) => element.numLetters == 6).scoredWords.isEmpty
-            ? Column(
-              children: [
-                const Text('6 Letter Words'),
-                WordListDisplay(wordList: wordResults.firstWhere((element) => element.numLetters == 6).scoredWords)
-              ],
-            )
+            !wordResults.firstWhere((element) => element.numLetters == 6).scoredWords.isEmpty
+            ? ResultDisplay(letterCount: 6, wordScore: wordResults.firstWhere((element) => element.numLetters == 6))
             : const SizedBox.shrink(),
             !wordResults.firstWhere((element) => element.numLetters == 7).scoredWords.isEmpty
-            ? Column(
-              children: [
-                const Text('7 Letter Words'),
-                WordListDisplay(wordList: wordResults.firstWhere((element) => element.numLetters == 7).scoredWords)
-              ],
-            )
+            ? ResultDisplay(letterCount: 7, wordScore: wordResults.firstWhere((element) => element.numLetters == 7))
             : const SizedBox.shrink(),
-                        !wordResults.firstWhere((element) => element.numLetters == 8).scoredWords.isEmpty
-            ? Column(
-              children: [
-                const Text('8 Letter Words'),
-                WordListDisplay(wordList: wordResults.firstWhere((element) => element.numLetters == 8).scoredWords)
-              ],
-            )
+            !wordResults.firstWhere((element) => element.numLetters == 8).scoredWords.isEmpty
+            ? ResultDisplay(letterCount: 8, wordScore: wordResults.firstWhere((element) => element.numLetters == 8))
             : const SizedBox.shrink(),
             !wordResults.firstWhere((element) => element.numLetters == 9).scoredWords.isEmpty
-            ? Column(
-              children: [
-                const Text('9 Letter Words'),
-                WordListDisplay(wordList: wordResults.firstWhere((element) => element.numLetters == 9).scoredWords)
-              ],
-            )
+            ? ResultDisplay(letterCount: 9, wordScore: wordResults.firstWhere((element) => element.numLetters == 9))
             : const SizedBox.shrink(),
 
           ],
         ),
       )
+    );
+  }
+}
+
+
+class ResultDisplay extends StatelessWidget {
+  final int letterCount;
+  final WordScore wordScore;
+
+  const ResultDisplay({
+    required this.letterCount,
+    required this.wordScore, 
+    Key? key 
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Text(
+            '${letterCount.toString()} Letter Words',
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Row(
+            children: [
+              const Text(
+                'Score: ',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+              Text('${wordScore.score}')
+            ],
+          ),
+          WordListDisplay(wordList: wordScore.scoredWords)
+        ],
+      ),
     );
   }
 }
