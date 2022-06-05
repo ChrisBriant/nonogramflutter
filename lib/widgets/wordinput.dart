@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nonogramflutter/screens/results.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
 
@@ -142,9 +143,19 @@ bool _checkWordInWord(String word1, String word2) {
   _submitWords() async {
     try {
       print('Trying to use this.');
-      await _nonogramProvider!.sendWords();
+      bool success = await _nonogramProvider!.sendWords();
+      if(success) {
+        Navigator.of(context).pushNamed(ResultsScreen.routeName);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('An error occred retrieving the results'),
+        ));
+      }
     } catch (err) {
       print('I am handling the exception');
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(err.toString()),
+      ));
       print(err.toString());
     }
   }

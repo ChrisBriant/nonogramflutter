@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './screens/home.dart';
+import './screens/results.dart';
 import './providers/nonogram_provider.dart';
+
 
 void main() {
   runApp(const Nonogram());
@@ -25,6 +27,9 @@ class Nonogram extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: Home(),
+        routes: {
+          ResultsScreen.routeName : (ctx) => ResultsScreen(),
+        }
       )
     );
   }

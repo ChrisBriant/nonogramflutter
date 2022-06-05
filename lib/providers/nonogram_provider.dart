@@ -23,6 +23,7 @@ class NonogramProvider with ChangeNotifier {
     if(_res.statusCode == 200) {
       //Set the nonogram data
       final _responseData = json.decode(_res.body);
+      print('The ID is ${_responseData['id']}');
       _nonogram = Nonogram(
         id: _responseData['id'], 
         word: _responseData['word'],
@@ -166,6 +167,14 @@ class NonogramProvider with ChangeNotifier {
   //GET METHODS
   get nonogram {
     return _nonogram;
+  }
+
+  get result {
+    return _result;
+  }
+
+  get solution {
+    return _solution;
   }
 }
 
