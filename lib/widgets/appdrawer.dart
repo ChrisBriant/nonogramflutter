@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/nonogram_provider.dart';
+import './wordlistdisplay.dart';
 
 
 class AppDrawer extends StatelessWidget {
@@ -81,26 +82,26 @@ class AppDrawer extends StatelessWidget {
   }
 }
 
-class WordListDisplay extends StatelessWidget {
-  final List<String> wordList;
+// class WordListDisplay extends StatelessWidget {
+//   final List<String> wordList;
 
-  const WordListDisplay({
-    Key? key,
-    required this.wordList,
-  }) : super(key: key);
+//   const WordListDisplay({
+//     Key? key,
+//     required this.wordList,
+//   }) : super(key: key);
 
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children:
-          wordList.map((e) {
-            return Container(
-              child:Text(e),
-              padding: EdgeInsets.symmetric(horizontal: 2),
-            );}).toList()
-        ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: Row(
+//         children:
+//           wordList.map((e) {
+//             return Container(
+//               child:Text(e),
+//               padding: EdgeInsets.symmetric(horizontal: 2),
+//             );}).toList()
+//         ),
+//     );
+//   }
+// }
