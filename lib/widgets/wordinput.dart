@@ -36,7 +36,7 @@ class _WordInputState extends State<WordInput> {
 
     _formKey.currentState!.save();
     if(_nonogramProvider != null) {
-      _nonogramProvider!.sendWords(_wordsString);
+      //_nonogramProvider!.sendWords(_wordsString);
     }
   
   }
@@ -139,6 +139,16 @@ bool _checkWordInWord(String word1, String word2) {
     
   }
 
+  _submitWords() async {
+    try {
+      print('Trying to use this.');
+      await _nonogramProvider!.sendWords();
+    } catch (err) {
+      print('I am handling the exception');
+      print(err.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     _nonogramProvider = Provider.of<NonogramProvider>(context,listen: false);
@@ -159,7 +169,7 @@ bool _checkWordInWord(String word1, String word2) {
                   ),
         ),
         ElevatedButton(
-          onPressed: _saveForm, 
+          onPressed: _submitWords, 
           child: const Text('Score')
         )
       ],
