@@ -12,7 +12,8 @@ class WordListDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Wrap(
         children:
           wordList.map((e) {
             return Container(

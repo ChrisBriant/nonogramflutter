@@ -18,46 +18,87 @@ class ResultsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Score')),
       body: SingleChildScrollView(
-        child:Column(
-          children: [
-            const Text(
-              'Score',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
+        child:Padding(
+          padding: const EdgeInsets.all(6.0),
+          child: Column(
+            children: [
+              const Text(
+                'Score',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
-            ),
-            const SizedBox(height: 10,),
-            Text(
-              'Congratulations! you have scored ${_nonogramProvider.result.totalScore} out of ${_nonogramProvider.solution.totalScore}.',
-              style: const TextStyle(
-                fontSize: 18,
+              const SizedBox(height: 10,),
+              Text(
+                'Congratulations! you have scored ${_nonogramProvider.result.totalScore} out of ${_nonogramProvider.solution.totalScore}.',
+                style: const TextStyle(
+                  fontSize: 18,
+                ),
               ),
-            ),
-            const SizedBox(height: 10,),
-            !wordResults.firstWhere((element) => element.numLetters == 3).scoredWords.isEmpty
-            ? ResultDisplay(letterCount: 3, wordScore: wordResults.firstWhere((element) => element.numLetters == 3))
-            : const SizedBox.shrink(),
-            !wordResults.firstWhere((element) => element.numLetters == 4).scoredWords.isEmpty
-            ? ResultDisplay(letterCount: 4, wordScore: wordResults.firstWhere((element) => element.numLetters == 4))
-            : const SizedBox.shrink(),
-            !wordResults.firstWhere((element) => element.numLetters == 5).scoredWords.isEmpty
-            ? ResultDisplay(letterCount: 5, wordScore: wordResults.firstWhere((element) => element.numLetters == 5))
-            : const SizedBox.shrink(),
-            !wordResults.firstWhere((element) => element.numLetters == 6).scoredWords.isEmpty
-            ? ResultDisplay(letterCount: 6, wordScore: wordResults.firstWhere((element) => element.numLetters == 6))
-            : const SizedBox.shrink(),
-            !wordResults.firstWhere((element) => element.numLetters == 7).scoredWords.isEmpty
-            ? ResultDisplay(letterCount: 7, wordScore: wordResults.firstWhere((element) => element.numLetters == 7))
-            : const SizedBox.shrink(),
-            !wordResults.firstWhere((element) => element.numLetters == 8).scoredWords.isEmpty
-            ? ResultDisplay(letterCount: 8, wordScore: wordResults.firstWhere((element) => element.numLetters == 8))
-            : const SizedBox.shrink(),
-            !wordResults.firstWhere((element) => element.numLetters == 9).scoredWords.isEmpty
-            ? ResultDisplay(letterCount: 9, wordScore: wordResults.firstWhere((element) => element.numLetters == 9))
-            : const SizedBox.shrink(),
+              const SizedBox(height: 10,),
+               const Text(
+                'Results',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10,),
+              wordResults.firstWhere((element) => element.numLetters == 3).scoredWords.isNotEmpty
+              ? ResultDisplay(letterCount: 3, wordScore: wordResults.firstWhere((element) => element.numLetters == 3))
+              : const SizedBox.shrink(),
+              wordResults.firstWhere((element) => element.numLetters == 4).scoredWords.isNotEmpty
+              ? ResultDisplay(letterCount: 4, wordScore: wordResults.firstWhere((element) => element.numLetters == 4))
+              : const SizedBox.shrink(),
+              wordResults.firstWhere((element) => element.numLetters == 5).scoredWords.isNotEmpty
+              ? ResultDisplay(letterCount: 5, wordScore: wordResults.firstWhere((element) => element.numLetters == 5))
+              : const SizedBox.shrink(),
+              wordResults.firstWhere((element) => element.numLetters == 6).scoredWords.isNotEmpty
+              ? ResultDisplay(letterCount: 6, wordScore: wordResults.firstWhere((element) => element.numLetters == 6))
+              : const SizedBox.shrink(),
+              wordResults.firstWhere((element) => element.numLetters == 7).scoredWords.isNotEmpty
+              ? ResultDisplay(letterCount: 7, wordScore: wordResults.firstWhere((element) => element.numLetters == 7))
+              : const SizedBox.shrink(),
+              wordResults.firstWhere((element) => element.numLetters == 8).scoredWords.isNotEmpty
+              ? ResultDisplay(letterCount: 8, wordScore: wordResults.firstWhere((element) => element.numLetters == 8))
+              : const SizedBox.shrink(),
+              wordResults.firstWhere((element) => element.numLetters == 9).scoredWords.isNotEmpty
+              ? ResultDisplay(letterCount: 9, wordScore: wordResults.firstWhere((element) => element.numLetters == 9))
+              : const SizedBox.shrink(),
+              const SizedBox(height: 10,),
+               const Text(
+                'Solution',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10,),
+              wordSolutions.firstWhere((element) => element.numLetters == 3).scoredWords.isNotEmpty
+              ? ResultDisplay(letterCount: 3, wordScore: wordSolutions.firstWhere((element) => element.numLetters == 3))
+              : const SizedBox.shrink(),
+              wordSolutions.firstWhere((element) => element.numLetters == 4).scoredWords.isNotEmpty
+              ? ResultDisplay(letterCount: 4, wordScore: wordSolutions.firstWhere((element) => element.numLetters == 4))
+              : const SizedBox.shrink(),
+              wordSolutions.firstWhere((element) => element.numLetters == 5).scoredWords.isNotEmpty
+              ? ResultDisplay(letterCount: 5, wordScore: wordSolutions.firstWhere((element) => element.numLetters == 5))
+              : const SizedBox.shrink(),
+              wordSolutions.firstWhere((element) => element.numLetters == 6).scoredWords.isNotEmpty
+              ? ResultDisplay(letterCount: 6, wordScore: wordSolutions.firstWhere((element) => element.numLetters == 6))
+              : const SizedBox.shrink(),
+              wordSolutions.firstWhere((element) => element.numLetters == 7).scoredWords.isNotEmpty
+              ? ResultDisplay(letterCount: 7, wordScore: wordSolutions.firstWhere((element) => element.numLetters == 7))
+              : const SizedBox.shrink(),
+              wordSolutions.firstWhere((element) => element.numLetters == 8).scoredWords.isNotEmpty
+              ? ResultDisplay(letterCount: 8, wordScore: wordSolutions.firstWhere((element) => element.numLetters == 8))
+              : const SizedBox.shrink(),
+              wordSolutions.firstWhere((element) => element.numLetters == 9).scoredWords.isNotEmpty
+              ? ResultDisplay(letterCount: 9, wordScore: wordSolutions.firstWhere((element) => element.numLetters == 9))
+              : const SizedBox.shrink(),
 
-          ],
+            ],
+          ),
         ),
       )
     );
