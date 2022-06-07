@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'dart:async';
 
 import '../providers/nonogram_provider.dart';
+import '../providers/textprovider.dart';
 
 class WordInput extends StatefulWidget {
   const WordInput({ Key? key }) : super(key: key);
@@ -16,10 +17,26 @@ class _WordInputState extends State<WordInput> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _inputContoller = TextEditingController();
   NonogramProvider? _nonogramProvider;
+  TextProvider? _textProvider;
   String? _wordsString;
   Timer? _timer;
   String tempWord = '';
   bool processingWordList = true;
+  //FocusNode focusNode = FocusNode();
+  // String labelText = 'Enter your words here.';
+  
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   focusNode.addListener(() {
+  //     if (focusNode.hasFocus) {
+  //       labelText = '';
+  //     } else {
+  //       labelText = 'Enter your words here.';
+  //     }
+  //     setState(() {});
+  //   });
+  // }
 
   //Define regex expressions
   final Map<int,RegExp> regExMap = {
@@ -32,16 +49,6 @@ class _WordInputState extends State<WordInput> {
     9 : RegExp(r'\b\w{9}\b',multiLine: true),
   };
 
-  // _saveForm() {
-  //   print('Form saves here');
-  //   print(_wordsString);
-
-  //   _formKey.currentState!.save();
-  //   if(_nonogramProvider != null) {
-  //     //_nonogramProvider!.sendWords(_wordsString);
-  //   }
-  
-  // }
 
 
 bool _checkWordInWord(String word1, String word2) {
@@ -83,12 +90,13 @@ bool _checkWordInWord(String word1, String word2) {
 
   _readWords(val) {
     //print(_inputContoller.text);
+    _textProvider!.displayFloatingWords = true;
     setState(() {
       processingWordList =  true;
     });
     if(_timer != null) {
       _timer!.cancel();
-      _timer = Timer(Duration(seconds: 3), () {
+      _timer = Timer(const Duration(seconds: 3), () {
           _matchWords(val);
           setState(() {
             processingWordList = false;
@@ -97,7 +105,7 @@ bool _checkWordInWord(String word1, String word2) {
         }
       );
     } else {
-      _timer = Timer(Duration(seconds: 3), () {
+      _timer = Timer(const Duration(seconds: 3), () {
           _matchWords(val);
           setState(() {
             processingWordList = false;
@@ -128,37 +136,40 @@ bool _checkWordInWord(String word1, String word2) {
   @override
   Widget build(BuildContext context) {
     _nonogramProvider = Provider.of<NonogramProvider>(context,listen: false);
+    _textProvider = Provider.of<TextProvider>(context,listen: false);
     _checkWordInWord('kkeey','emskkyeok');
 
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       color: Colors.purple.shade900,
       child: Column(
         children: [
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           Form(
             key: _formKey,
-            child: Container(
-              child: TextFormField(
-                        initialValue: null,
-                        maxLines: 6,
-                        controller: _inputContoller,
-                        onChanged: (value) { _readWords(value); },
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          labelText: 'Enter words here.',
-                          border: OutlineInputBorder(),
-                          fillColor: Colors.white,
-                          filled: true,
-                          focusedBorder:  OutlineInputBorder(),
-                        ),
-                        onSaved: (value) { _wordsString = value; },
+            child: TextFormField(
+                      initialValue: null,
+                      maxLines: 6,
+                      controller: _inputContoller,
+                      onChanged: (value) { _readWords(value); },
+                      onEditingComplete: () => _textProvider!.displayFloatingWords = false,
+                      keyboardType: TextInputType.text,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        fillColor: Colors.white,
+                        filled: true,
+                        focusedBorder:  OutlineInputBorder(),
                       ),
-            ),
+                      onSaved: (value) { _wordsString = value; },
+                    ),
           ),
           ElevatedButton(
             onPressed: processingWordList ? null : _submitWords, 
-            child: const Text('Score')
+            child: const Text('Score'),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.amber,
+              //onPrimary: Colors.amber
+            ),
           )
         ],
       ),

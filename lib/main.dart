@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import './screens/home.dart';
 import './screens/results.dart';
 import './providers/nonogram_provider.dart';
+import './providers/textprovider.dart';
 import './environment.dart';
 
 
@@ -20,7 +21,7 @@ class Nonogram extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (ctx) => NonogramProvider()
-        )
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -30,7 +31,7 @@ class Nonogram extends StatelessWidget {
         ),
         home: Home(),
         routes: {
-          ResultsScreen.routeName : (ctx) => ResultsScreen(),
+          ResultsScreen.routeName : (ctx) => const ResultsScreen(),
         }
       )
     );

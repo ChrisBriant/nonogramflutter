@@ -112,7 +112,7 @@ class ResultDisplay extends StatelessWidget {
 
   const ResultDisplay({
     required this.letterCount,
-    required this.wordScore, 
+    required this.wordScore,
     Key? key 
   }) : super(key: key);
 

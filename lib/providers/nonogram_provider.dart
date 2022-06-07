@@ -161,7 +161,7 @@ class NonogramProvider with ChangeNotifier {
       _wordList.add(word);
     }
     _nonogram!.foundWords![i] = _wordList;
-    notifyListeners();
+    //notifyListeners();
   }
 
   //GET METHODS
@@ -176,6 +176,7 @@ class NonogramProvider with ChangeNotifier {
   get solution {
     return _solution;
   }
+
 }
 
 

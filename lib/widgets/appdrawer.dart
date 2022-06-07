@@ -14,9 +14,9 @@ class AppDrawer extends StatelessWidget {
     final _nonogramProvider = Provider.of<NonogramProvider>(context,listen: true);
 
     return Drawer(
+      backgroundColor: Colors.amber.shade200,
       child: SingleChildScrollView(
         child: Container(
-            color:Colors.amber.shade200,
             child: Column(
               children: [
                 const SizedBox(height: 50,),
@@ -27,53 +27,53 @@ class AppDrawer extends StatelessWidget {
                 const SizedBox(height: 50,),
                 const Text(
                   '3 Letter Words',
-                  style: TextStyle(fontSize: 22),
+                  style: TextStyle(fontSize: 20),
                 ),
                 WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[3]),
                 const Divider(),
                 const SizedBox(height: 50,),
-                const Text(
-                  '4 Letter Words',
-                  style: TextStyle(fontSize: 22),
-                ),
-                WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[4]),
-                const Divider(),
-                const SizedBox(height: 50,),
-                const Text(
-                  '5 Letter Words',
-                  style: TextStyle(fontSize: 22),
-                ),
-                WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[5]),
-                const Divider(),
-                const SizedBox(height: 50,),
-                const Text(
-                  '6 Letter Words',
-                  style: TextStyle(fontSize: 22),
-                ),
-                WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[6]),
-                const Divider(),
-                const SizedBox(height: 50,),
-                const Text(
-                  '7 Letter Words',
-                  style: TextStyle(fontSize: 22),
-                ),
-                WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[7]),
-                const Divider(),
-                const SizedBox(height: 50,),
-                const Text(
-                  '8 Letter Words',
-                  style: TextStyle(fontSize: 22),
-                ),
-                WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[8]),
-                const Divider(),
-                const SizedBox(height: 50,),
-                const Text(
-                  '9 Letter Words',
-                  style: TextStyle(fontSize: 22),
-                ),
-                WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[9]),
-                const Divider(),
-                const SizedBox(height: 50,),
+                // const Text(
+                //   '4 Letter Words',
+                //   style: TextStyle(fontSize: 22),
+                // ),
+                // WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[4]),
+                // const Divider(),
+                // const SizedBox(height: 50,),
+                // const Text(
+                //   '5 Letter Words',
+                //   style: TextStyle(fontSize: 22),
+                // ),
+                // WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[5]),
+                // const Divider(),
+                // const SizedBox(height: 50,),
+                // const Text(
+                //   '6 Letter Words',
+                //   style: TextStyle(fontSize: 22),
+                // ),
+                // WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[6]),
+                // const Divider(),
+                // const SizedBox(height: 50,),
+                // const Text(
+                //   '7 Letter Words',
+                //   style: TextStyle(fontSize: 22),
+                // ),
+                // WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[7]),
+                // const Divider(),
+                // const SizedBox(height: 50,),
+                // const Text(
+                //   '8 Letter Words',
+                //   style: TextStyle(fontSize: 22),
+                // ),
+                // WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[8]),
+                // const Divider(),
+                // const SizedBox(height: 50,),
+                // const Text(
+                //   '9 Letter Words',
+                //   style: TextStyle(fontSize: 22),
+                // ),
+                // WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[9]),
+                // const Divider(),
+                // const SizedBox(height: 50,),
               ]
             )
           ),
