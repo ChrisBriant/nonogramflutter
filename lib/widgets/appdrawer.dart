@@ -16,7 +16,7 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: SingleChildScrollView(
         child: Container(
-            color:const  Color.fromRGBO(230, 210, 170, 1),
+            color:Colors.amber.shade200,
             child: Column(
               children: [
                 const SizedBox(height: 50,),

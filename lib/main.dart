@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import './screens/home.dart';
 import './screens/results.dart';
 import './providers/nonogram_provider.dart';
+import './environment.dart';
 
 
 void main() {
@@ -25,6 +26,7 @@ class Nonogram extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Environment().backgroundColor,
         ),
         home: Home(),
         routes: {

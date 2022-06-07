@@ -12,23 +12,24 @@ class Home extends StatelessWidget {
     final _nonogramProvider = Provider.of<NonogramProvider>(context,listen: false);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Nonogram'),),
+      //appBar: AppBar(title: const Text('Nonogram'),),
+      resizeToAvoidBottomInset: false, 
       drawer: AppDrawer(),
-      body: SingleChildScrollView(
-        child: FutureBuilder<bool>(
-          future: _nonogramProvider.getNonogram(),
-          builder: (ctx,sn) => sn.connectionState == ConnectionState.waiting
-            ? const CircularProgressIndicator()
-            : Consumer<NonogramProvider>(builder: (ctx,data,_) => Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  NonogramWidget(word: data.nonogram.word),
-                  const WordInput(),
-                ],
-              )
-            ),
+      body: FutureBuilder<bool>(
+        future: _nonogramProvider.getNonogram(),
+        builder: (ctx,sn) => sn.connectionState == ConnectionState.waiting
+          ? const CircularProgressIndicator()
+          : Consumer<NonogramProvider>(builder: (ctx,data,_) => Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              //mainAxisSize: MainAxisSize.min,
+              children: [
+                NonogramWidget(word: data.nonogram.word),
+                const WordInput(),
+              ],
+            )
           ),
-      ),
+        ),
     );
   }
 }

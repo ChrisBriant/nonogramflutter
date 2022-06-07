@@ -130,24 +130,38 @@ bool _checkWordInWord(String word1, String word2) {
     _nonogramProvider = Provider.of<NonogramProvider>(context,listen: false);
     _checkWordInWord('kkeey','emskkyeok');
 
-    return Column(
-      children: [
-        Form(
-          key: _formKey,
-          child: TextFormField(
-                    //initialValue: '',
-                    controller: _inputContoller,
-                    onChanged: (value) { _readWords(value); },
-                    decoration: const InputDecoration(labelText: 'Enter words below:'),
-                    keyboardType: TextInputType.text,
-                    onSaved: (value) { _wordsString = value; },
-                  ),
-        ),
-        ElevatedButton(
-          onPressed: processingWordList ? null : _submitWords, 
-          child: const Text('Score')
-        )
-      ],
+    return Container(
+      padding: EdgeInsets.all(8),
+      color: Colors.purple.shade900,
+      child: Column(
+        children: [
+          SizedBox(height: 10,),
+          Form(
+            key: _formKey,
+            child: Container(
+              child: TextFormField(
+                        initialValue: null,
+                        maxLines: 6,
+                        controller: _inputContoller,
+                        onChanged: (value) { _readWords(value); },
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          labelText: 'Enter words here.',
+                          border: OutlineInputBorder(),
+                          fillColor: Colors.white,
+                          filled: true,
+                          focusedBorder:  OutlineInputBorder(),
+                        ),
+                        onSaved: (value) { _wordsString = value; },
+                      ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: processingWordList ? null : _submitWords, 
+            child: const Text('Score')
+          )
+        ],
+      ),
     );
   }
 }
