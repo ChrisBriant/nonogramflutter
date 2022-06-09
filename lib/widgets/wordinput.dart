@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'dart:async';
 
 import '../providers/nonogram_provider.dart';
-import '../providers/textprovider.dart';
+// import '../providers/textprovider.dart';
 
 class WordInput extends StatefulWidget {
   const WordInput({ Key? key }) : super(key: key);
@@ -17,26 +17,11 @@ class _WordInputState extends State<WordInput> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _inputContoller = TextEditingController();
   NonogramProvider? _nonogramProvider;
-  TextProvider? _textProvider;
+  // TextProvider? _textProvider;
   String? _wordsString;
   Timer? _timer;
   String tempWord = '';
   bool processingWordList = true;
-  //FocusNode focusNode = FocusNode();
-  // String labelText = 'Enter your words here.';
-  
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   focusNode.addListener(() {
-  //     if (focusNode.hasFocus) {
-  //       labelText = '';
-  //     } else {
-  //       labelText = 'Enter your words here.';
-  //     }
-  //     setState(() {});
-  //   });
-  // }
 
   //Define regex expressions
   final Map<int,RegExp> regExMap = {
@@ -90,8 +75,9 @@ bool _checkWordInWord(String word1, String word2) {
 
   _readWords(val) {
     //print(_inputContoller.text);
-    _textProvider!.displayFloatingWords = true;
+    
     setState(() {
+      //_textProvider!.displayFloatingWords = true;
       processingWordList =  true;
     });
     if(_timer != null) {
@@ -136,12 +122,10 @@ bool _checkWordInWord(String word1, String word2) {
   @override
   Widget build(BuildContext context) {
     _nonogramProvider = Provider.of<NonogramProvider>(context,listen: false);
-    _textProvider = Provider.of<TextProvider>(context,listen: false);
-    _checkWordInWord('kkeey','emskkyeok');
+    //_textProvider = Provider.of<TextProvider>(context,listen: false);
 
     return Container(
       padding: const EdgeInsets.all(8),
-      color: Colors.purple.shade900,
       child: Column(
         children: [
           const SizedBox(height: 10,),
@@ -152,7 +136,7 @@ bool _checkWordInWord(String word1, String word2) {
                       maxLines: 6,
                       controller: _inputContoller,
                       onChanged: (value) { _readWords(value); },
-                      onEditingComplete: () => _textProvider!.displayFloatingWords = false,
+                      //onEditingComplete: () => _textProvider!.displayFloatingWords = false,
                       keyboardType: TextInputType.text,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -164,11 +148,16 @@ bool _checkWordInWord(String word1, String word2) {
                     ),
           ),
           ElevatedButton(
-            onPressed: processingWordList ? null : _submitWords, 
-            child: const Text('Score'),
+            onPressed: _nonogramProvider!.wordListEmpty ? null : _submitWords, 
+            child: Text('Score',
+              style: TextStyle(
+                color: _nonogramProvider!.wordListEmpty ? Colors.grey : Colors.white
+              ),
+            ),
             style: ElevatedButton.styleFrom(
               primary: Colors.amber,
               //onPrimary: Colors.amber
+              onSurface: Colors.grey,
             ),
           )
         ],

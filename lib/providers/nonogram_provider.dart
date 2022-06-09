@@ -9,39 +9,47 @@ class NonogramProvider with ChangeNotifier {
   Nonogram? _nonogram;
   Result? _result;
   Result? _solution;
+  //bool _wordListEmpty = true;
 
   //API CALLS
-  Future<bool> getNonogram() async {
-    Map<String, String> _headers = {
-        'Authorization' : Environment().apiKey,
-        'Content-Type': 'application/json'
-    };
+  Future<Nonogram?> getNonogram() async {
+    if(_nonogram != null) {
+      //return Future.error('CONNECTION ERROR!');
+      return _nonogram;
+    } else {
+      Map<String, String> _headers = {
+          'Authorization' : Environment().apiKey,
+          'Content-Type': 'application/json'
+      };
 
-    final _uri = Uri.parse('${BASEURL}/getnonogram/');
-    var _res = await http.get(_uri, headers: _headers);
+      final _uri = Uri.parse('${BASEURL}/getnonogram/');
+      var _res = await http.get(_uri, headers: _headers);
 
-    if(_res.statusCode == 200) {
-      //Set the nonogram data
-      final _responseData = json.decode(_res.body);
-      print('The ID is ${_responseData['id']}');
-      _nonogram = Nonogram(
-        id: _responseData['id'], 
-        word: _responseData['word'],
-        special: _responseData['word'].toString().characters.toList()[4].toString(),
-        foundWords: {
-          3 : [],
-          4 : [],
-          5 : [],
-          6 : [],
-          7 : [],
-          8 : [],
-          9 : [],
-        }
-      );
-      return true;
-    }  else {
-      return false;
+      if(_res.statusCode == 200) {
+        //Set the nonogram data
+        final _responseData = json.decode(_res.body);
+        _nonogram = Nonogram(
+          id: _responseData['id'], 
+          word: _responseData['word'],
+          special: _responseData['word'].toString().characters.toList()[4].toString(),
+          foundWords: {
+            3 : [],
+            4 : [],
+            5 : [],
+            6 : [],
+            7 : [],
+            8 : [],
+            9 : [],
+          }
+        );
+        //return Future.error('CONNECTION ERROR!');
+      } else {
+        return Future.error('CONNECTION ERROR!');
+      }
+      
+      return _nonogram; 
     }
+
   }
 
   _generateResults(Map<dynamic,dynamic> resultData) {
@@ -51,13 +59,7 @@ class NonogramProvider with ChangeNotifier {
 
     Map<dynamic,dynamic> results = resultData['result'];
     for(int i=3;i<10;i++) {
-      print('Going through results');
-      // print('${i.toString()}letter');
-      // print(results['${i.toString()}letter']);
-      //for(var result in results['${i.toString()}letter']) {
       Map<String,dynamic> result = results['${i.toString()}letter'];
-      print('RESULT');
-      print(result);
       WordScore wordScore = WordScore(
         numLetters: i, 
         score:  result['score'], 
@@ -65,9 +67,7 @@ class NonogramProvider with ChangeNotifier {
         unscoredWords: List<String>.from(result['unscoredWords']), 
         wordsChecked: List<String>.from(result['wordsChecked'])
       );
-      print('Created wordscore');
       userWordScoreList.add(wordScore);
-      //}
     }
 
     //Create the provided result
@@ -76,9 +76,6 @@ class NonogramProvider with ChangeNotifier {
       totalScore: resultData['totalScore'], 
       wordScore: userWordScoreList
     );
-
-    print('Processed Results');
-    print(_result);
 
     //CREATE THE SOLTION RESULT PART
     List<WordScore> solutionWordScoreList = [];
@@ -93,7 +90,6 @@ class NonogramProvider with ChangeNotifier {
         unscoredWords: List<String>.from(result['unscoredWords']), 
         wordsChecked: List<String>.from(result['wordsChecked'])
       );
-      print('Created solution wordscore');
       solutionWordScoreList.add(wordScore);
     }
 
@@ -103,9 +99,6 @@ class NonogramProvider with ChangeNotifier {
       totalScore: resultData['solution']['totalScore'], 
       wordScore: solutionWordScoreList
     );
-
-    print('Processed Solution');
-    print(_solution);
 
   }
 
@@ -145,8 +138,6 @@ class NonogramProvider with ChangeNotifier {
 
     if(_res.statusCode == 200) {
       final _responseData = json.decode(_res.body);
-      print('Response');
-      print(_responseData);
       _generateResults(_responseData);
       return true;
     }
@@ -161,7 +152,6 @@ class NonogramProvider with ChangeNotifier {
       _wordList.add(word);
     }
     _nonogram!.foundWords![i] = _wordList;
-    //notifyListeners();
   }
 
   //GET METHODS
@@ -175,6 +165,18 @@ class NonogramProvider with ChangeNotifier {
 
   get solution {
     return _solution;
+  }
+
+  get wordListEmpty {
+    List<String>? allWords = [];
+    for(int i=3;i<10; i++) {
+      if(_nonogram!.foundWords![i] != null) {
+        _nonogram!.foundWords![i]!.forEach((element) {
+          allWords.add(element);
+        });
+      }
+    }
+    return allWords.isEmpty;
   }
 
 }

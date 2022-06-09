@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/nonogram_provider.dart';
 import './wordlistdisplay.dart';
+import '../environment.dart';
 
 
 class AppDrawer extends StatelessWidget {
@@ -14,7 +15,7 @@ class AppDrawer extends StatelessWidget {
     final _nonogramProvider = Provider.of<NonogramProvider>(context,listen: true);
 
     return Drawer(
-      backgroundColor: Colors.amber.shade200,
+      backgroundColor: Environment().appDrawerBackgroundColor,
       child: SingleChildScrollView(
         child: Container(
             child: Column(
@@ -31,13 +32,13 @@ class AppDrawer extends StatelessWidget {
                 // ),
                 // WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[3]),
                 // const Divider(),
-                WordSection(wordCount: 4, words: _nonogramProvider.nonogram.foundWords[3]),
+                WordSection(wordCount: 3, words: _nonogramProvider.nonogram.foundWords[3]),
                 WordSection(wordCount: 4, words: _nonogramProvider.nonogram.foundWords[4]),
-                WordSection(wordCount: 4, words: _nonogramProvider.nonogram.foundWords[5]),
-                WordSection(wordCount: 4, words: _nonogramProvider.nonogram.foundWords[6]),
-                WordSection(wordCount: 4, words: _nonogramProvider.nonogram.foundWords[7]),
-                WordSection(wordCount: 4, words: _nonogramProvider.nonogram.foundWords[8]),
-                WordSection(wordCount: 4, words: _nonogramProvider.nonogram.foundWords[9]),
+                WordSection(wordCount: 5, words: _nonogramProvider.nonogram.foundWords[5]),
+                WordSection(wordCount: 6, words: _nonogramProvider.nonogram.foundWords[6]),
+                WordSection(wordCount: 7, words: _nonogramProvider.nonogram.foundWords[7]),
+                WordSection(wordCount: 8, words: _nonogramProvider.nonogram.foundWords[8]),
+                WordSection(wordCount: 9, words: _nonogramProvider.nonogram.foundWords[9]),
                 //const SizedBox(height: 50,),
                 // const Text(
                 //   '4 Letter Words',
@@ -134,7 +135,7 @@ class WordSection extends StatelessWidget {
                   '${wordCount.toString()} Letter Words',
                   style: TextStyle(fontSize: 20),
                 ),
-                WordListDisplay(wordList: words),
+                WordListDisplay(background: Environment().appDrawerBackgroundColor, wordList: words),
                 const Divider(),
     ]);
   }

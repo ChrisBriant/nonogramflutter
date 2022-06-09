@@ -24,60 +24,63 @@ class NonogramWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     print(getRows(word));
 
-    return Column(
-      children: [
-        SizedBox(height: 10,),
-        Column(
-          children: getRows(word).asMap().entries.map((group) { return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: group.value.asMap().entries.map((e) { 
-                //Get special character
-                Color bgColor;
-                if(group.key == 1 && e.key == 1) {
-                  bgColor = Colors.purple.shade200;
-                } else {
-                  bgColor = Colors.amber.shade200;
-                }
-                return  Letter(letter: e.value, bgColor: bgColor,); 
-              }).toList()
-          );}).toList(),
-          //children: word.characters.map((e) { return Text(e.toString()); }).toList(),
-        ),
-        TextButton(
-          onPressed: () { Scaffold.of(context).openDrawer(); }, 
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.arrow_back,
-                color: Colors.deepOrange.shade700,
-              ),
-              Text(
-                'View my Words',
-                style: TextStyle(
-                  color: Colors.deepOrange.shade700
-                ),
-              ),
-            ],
+    return Container(
+      color: Color.fromARGB(255, 200, 226, 188),
+      child: Column(
+        children: [
+          SizedBox(height: MediaQuery.of(context).size.height * 0.1,),
+          Column(
+            children: getRows(word).asMap().entries.map((group) { return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: group.value.asMap().entries.map((e) { 
+                  //Get special character
+                  Color bgColor;
+                  if(group.key == 1 && e.key == 1) {
+                    bgColor = Colors.purple.shade200;
+                  } else {
+                    bgColor = Colors.amber.shade200;
+                  }
+                  return  Letter(letter: e.value, bgColor: bgColor,); 
+                }).toList()
+            );}).toList(),
+            //children: word.characters.map((e) { return Text(e.toString()); }).toList(),
           ),
-        //   style: ElevatedButton.styleFrom(
-        //     primary: Environment().backgroundColor,
+          TextButton(
+            onPressed: () { Scaffold.of(context).openDrawer(); }, 
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.arrow_back,
+                  color: Colors.deepOrange.shade700,
+                ),
+                Text(
+                  'View my Words',
+                  style: TextStyle(
+                    color: Colors.deepOrange.shade700
+                  ),
+                ),
+              ],
+            ),
+          //   style: ElevatedButton.styleFrom(
+          //     primary: Environment().backgroundColor,
 
-        //     // onPrimary: Colors.transparent,
-        //     // onSurface: Colors.transparent,
-        //     // shadowColor: Colors.transparent
-        //   ).merge(
-        //     ButtonStyle(
-        //       elevation: MaterialStateProperty.resolveWith<double>(
-        //         (Set<MaterialState> states) {
-        //           if (states.contains(MaterialState.pressed))
-        //             return 0;
-        //           return 0;
-        //         },
-        //       ),
-        //     ),
-        ),
-      ],
+          //     // onPrimary: Colors.transparent,
+          //     // onSurface: Colors.transparent,
+          //     // shadowColor: Colors.transparent
+          //   ).merge(
+          //     ButtonStyle(
+          //       elevation: MaterialStateProperty.resolveWith<double>(
+          //         (Set<MaterialState> states) {
+          //           if (states.contains(MaterialState.pressed))
+          //             return 0;
+          //           return 0;
+          //         },
+          //       ),
+          //     ),
+          ),
+        ],
+      ),
     );
   }
 }
