@@ -24,14 +24,21 @@ class AppDrawer extends StatelessWidget {
                   'My Found Words',
                   style: TextStyle(fontSize: 22),
                 ),
-                const SizedBox(height: 50,),
-                const Text(
-                  '3 Letter Words',
-                  style: TextStyle(fontSize: 20),
-                ),
-                WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[3]),
-                const Divider(),
-                const SizedBox(height: 50,),
+                // const SizedBox(height: 50,),
+                // const Text(
+                //   '3 Letter Words',
+                //   style: TextStyle(fontSize: 20),
+                // ),
+                // WordListDisplay(wordList: _nonogramProvider.nonogram.foundWords[3]),
+                // const Divider(),
+                WordSection(wordCount: 4, words: _nonogramProvider.nonogram.foundWords[3]),
+                WordSection(wordCount: 4, words: _nonogramProvider.nonogram.foundWords[4]),
+                WordSection(wordCount: 4, words: _nonogramProvider.nonogram.foundWords[5]),
+                WordSection(wordCount: 4, words: _nonogramProvider.nonogram.foundWords[6]),
+                WordSection(wordCount: 4, words: _nonogramProvider.nonogram.foundWords[7]),
+                WordSection(wordCount: 4, words: _nonogramProvider.nonogram.foundWords[8]),
+                WordSection(wordCount: 4, words: _nonogramProvider.nonogram.foundWords[9]),
+                //const SizedBox(height: 50,),
                 // const Text(
                 //   '4 Letter Words',
                 //   style: TextStyle(fontSize: 22),
@@ -105,3 +112,30 @@ class AppDrawer extends StatelessWidget {
 //     );
 //   }
 // }
+
+class WordSection extends StatelessWidget {
+  final List<String> words;
+  final int wordCount;
+
+  const WordSection({ 
+    required this.words,
+    required this.wordCount,
+    Key? key 
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if(this.words.length <= 0) {
+      return SizedBox(height: 0,);
+    }
+    return Column(children: [
+                const SizedBox(height: 50,),
+                Text(
+                  '${wordCount.toString()} Letter Words',
+                  style: TextStyle(fontSize: 20),
+                ),
+                WordListDisplay(wordList: words),
+                const Divider(),
+    ]);
+  }
+}
