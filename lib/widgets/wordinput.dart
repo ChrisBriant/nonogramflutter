@@ -99,7 +99,7 @@ bool _checkWordInWord(String word1, String word2) {
     try {
       bool success = await _nonogramProvider!.sendWords();
       if(success) {
-        Navigator.of(context).pushNamed(ResultsScreen.routeName);
+        Navigator.of(context).popAndPushNamed(ResultsScreen.routeName);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('An error occred retrieving the results'),

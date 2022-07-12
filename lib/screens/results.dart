@@ -40,7 +40,15 @@ class ResultsScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10,),
-                 const Text(
+                ElevatedButton(
+                  onPressed: () {
+                    _nonogramProvider.resetData();
+                    Navigator.of(context).popAndPushNamed('/');
+                  }, 
+                  child: const Text('Start Over')
+                ),
+                const SizedBox(height: 10,),
+                const Text(
                   'Results',
                   style: TextStyle(
                     fontSize: 18,

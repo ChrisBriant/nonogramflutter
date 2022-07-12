@@ -31,6 +31,7 @@ class Nonogram extends StatelessWidget {
         home: const Home(),
         routes: {
           ResultsScreen.routeName : (ctx) => const ResultsScreen(),
+          //Home.routeName : (ctx) => const Home(),
         }
       )
     );

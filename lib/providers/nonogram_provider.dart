@@ -151,6 +151,12 @@ class NonogramProvider with ChangeNotifier {
     _nonogram!.foundWords![i] = _wordList;
   }
 
+  resetData() {
+    _nonogram = null;
+    _result = null;
+    _solution = null;
+  }
+
   //GET METHODS
   get nonogram {
     return _nonogram;

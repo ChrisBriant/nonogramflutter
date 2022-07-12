@@ -7,6 +7,7 @@ import '../widgets/appdrawer.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
+  static String routeName = '/home'; 
 
 
   @override
