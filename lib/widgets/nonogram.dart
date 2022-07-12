@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import '../environment.dart';
 
 class NonogramWidget extends StatelessWidget {
   final String word;
@@ -22,10 +20,8 @@ class NonogramWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(getRows(word));
-
     return Container(
-      color: Color.fromARGB(255, 200, 226, 188),
+      color: const Color.fromARGB(255, 200, 226, 188),
       child: Column(
         children: [
           SizedBox(height: MediaQuery.of(context).size.height * 0.1,),
@@ -43,7 +39,6 @@ class NonogramWidget extends StatelessWidget {
                   return  Letter(letter: e.value, bgColor: bgColor,); 
                 }).toList()
             );}).toList(),
-            //children: word.characters.map((e) { return Text(e.toString()); }).toList(),
           ),
           TextButton(
             onPressed: () { Scaffold.of(context).openDrawer(); }, 
@@ -62,22 +57,6 @@ class NonogramWidget extends StatelessWidget {
                 ),
               ],
             ),
-          //   style: ElevatedButton.styleFrom(
-          //     primary: Environment().backgroundColor,
-
-          //     // onPrimary: Colors.transparent,
-          //     // onSurface: Colors.transparent,
-          //     // shadowColor: Colors.transparent
-          //   ).merge(
-          //     ButtonStyle(
-          //       elevation: MaterialStateProperty.resolveWith<double>(
-          //         (Set<MaterialState> states) {
-          //           if (states.contains(MaterialState.pressed))
-          //             return 0;
-          //           return 0;
-          //         },
-          //       ),
-          //     ),
           ),
         ],
       ),
@@ -109,7 +88,7 @@ class Letter extends StatelessWidget {
         color: bgColor,
       ),
       child:Padding(
-        padding: EdgeInsets.all(4),
+        padding: const EdgeInsets.all(4),
           child: Text(letter, style: TextStyle(
             fontSize: boxDimension - boxDimension * .3,
           ),

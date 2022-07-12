@@ -4,17 +4,16 @@ import 'package:http/http.dart' as http;
 import '../environment.dart';
 
 class NonogramProvider with ChangeNotifier {
+  // ignore: constant_identifier_names
   static const String BASEURL = 'https://nonogram-api.cb-arcade.co.uk/api';
 
   Nonogram? _nonogram;
   Result? _result;
   Result? _solution;
-  //bool _wordListEmpty = true;
 
   //API CALLS
   Future<Nonogram?> getNonogram() async {
     if(_nonogram != null) {
-      //return Future.error('CONNECTION ERROR!');
       return _nonogram;
     } else {
       Map<String, String> _headers = {
@@ -22,7 +21,7 @@ class NonogramProvider with ChangeNotifier {
           'Content-Type': 'application/json'
       };
 
-      final _uri = Uri.parse('${BASEURL}/getnonogram/');
+      final _uri = Uri.parse('$BASEURL/getnonogram/');
       var _res = await http.get(_uri, headers: _headers);
 
       if(_res.statusCode == 200) {
@@ -42,7 +41,6 @@ class NonogramProvider with ChangeNotifier {
             9 : [],
           }
         );
-        //return Future.error('CONNECTION ERROR!');
       } else {
         return Future.error('CONNECTION ERROR!');
       }
@@ -103,12 +101,11 @@ class NonogramProvider with ChangeNotifier {
   }
 
   Future<bool> sendWords() async {
-    print('Sending Words');
-
     //Collect all the words to send
     List<String>? allWords = [];
     for(int i=3;i<10; i++) {
       if(_nonogram!.foundWords![i] != null) {
+        // ignore: avoid_function_literals_in_foreach_calls
         _nonogram!.foundWords![i]!.forEach((element) {
           allWords.add(element);
         });
@@ -171,6 +168,7 @@ class NonogramProvider with ChangeNotifier {
     List<String>? allWords = [];
     for(int i=3;i<10; i++) {
       if(_nonogram!.foundWords![i] != null) {
+        // ignore: avoid_function_literals_in_foreach_calls
         _nonogram!.foundWords![i]!.forEach((element) {
           allWords.add(element);
         });

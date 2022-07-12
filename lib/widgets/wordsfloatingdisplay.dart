@@ -8,8 +8,8 @@ class WordsFloatingDisplay extends StatelessWidget {
     return Container(
       width: 200,
       height: 200,
-      child: Text('THIS IS A FLOATING WIDGET'),
-      color: Color.fromARGB(220, 206, 147, 216),
+      child: const Text('THIS IS A FLOATING WIDGET'),
+      color: const Color.fromARGB(220, 206, 147, 216),
     );
   }
 }

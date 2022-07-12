@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'dart:async';
 
 import '../providers/nonogram_provider.dart';
-// import '../providers/textprovider.dart';
 
 class WordInput extends StatefulWidget {
   const WordInput({ Key? key }) : super(key: key);
@@ -15,10 +14,8 @@ class WordInput extends StatefulWidget {
 
 class _WordInputState extends State<WordInput> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController _inputContoller = TextEditingController();
+  final TextEditingController _inputContoller = TextEditingController();
   NonogramProvider? _nonogramProvider;
-  // TextProvider? _textProvider;
-  String? _wordsString;
   Timer? _timer;
   String tempWord = '';
   bool processingWordList = true;
@@ -58,7 +55,6 @@ bool _checkWordInWord(String word1, String word2) {
 
   //Performs word matching
   _matchWords(wordText) {
-    String testStr = '3';
     String nonogramWord = _nonogramProvider!.nonogram.word;
 
 
@@ -74,10 +70,7 @@ bool _checkWordInWord(String word1, String word2) {
   }
 
   _readWords(val) {
-    //print(_inputContoller.text);
-    
     setState(() {
-      //_textProvider!.displayFloatingWords = true;
       processingWordList =  true;
     });
     if(_timer != null) {
@@ -122,7 +115,6 @@ bool _checkWordInWord(String word1, String word2) {
   @override
   Widget build(BuildContext context) {
     _nonogramProvider = Provider.of<NonogramProvider>(context,listen: false);
-    //_textProvider = Provider.of<TextProvider>(context,listen: false);
 
     return Container(
       padding: const EdgeInsets.all(8),
@@ -136,7 +128,6 @@ bool _checkWordInWord(String word1, String word2) {
                       maxLines: 6,
                       controller: _inputContoller,
                       onChanged: (value) { _readWords(value); },
-                      //onEditingComplete: () => _textProvider!.displayFloatingWords = false,
                       keyboardType: TextInputType.text,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -144,7 +135,6 @@ bool _checkWordInWord(String word1, String word2) {
                         filled: true,
                         focusedBorder:  OutlineInputBorder(),
                       ),
-                      onSaved: (value) { _wordsString = value; },
                     ),
           ),
           ElevatedButton(
@@ -156,7 +146,6 @@ bool _checkWordInWord(String word1, String word2) {
             ),
             style: ElevatedButton.styleFrom(
               primary: Colors.amber,
-              //onPrimary: Colors.amber
               onSurface: Colors.grey,
             ),
           )

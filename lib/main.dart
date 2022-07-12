@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import './screens/home.dart';
 import './screens/results.dart';
 import './providers/nonogram_provider.dart';
-import './providers/textprovider.dart';
 import './environment.dart';
 
 
@@ -29,7 +28,7 @@ class Nonogram extends StatelessWidget {
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: Environment().backgroundColor,
         ),
-        home: Home(),
+        home: const Home(),
         routes: {
           ResultsScreen.routeName : (ctx) => const ResultsScreen(),
         }

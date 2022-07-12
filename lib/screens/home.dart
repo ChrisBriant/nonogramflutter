@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/nonogram_provider.dart';
-import '../providers/textprovider.dart';
 import '../widgets/nonogram.dart';
 import '../widgets/wordinput.dart';
 import '../widgets/appdrawer.dart';
-import '../widgets/wordsfloatingdisplay.dart';
 
 class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
     final _nonogramProvider = Provider.of<NonogramProvider>(context,listen: false);
-    //final viewPortHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      //appBar: AppBar(title: const Text('Nonogram'),),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       body: SingleChildScrollView(
         child: FutureBuilder<Nonogram?>(
           future: _nonogramProvider.getNonogram(),
@@ -35,7 +33,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   Container(
-                      padding: EdgeInsets.symmetric(vertical: 10) ,
+                      padding: const EdgeInsets.symmetric(vertical: 10) ,
                       width: MediaQuery.of(context).size.width * .8,
                       child: Image.asset('assets/images/sad.png',fit: BoxFit.fitWidth, ),
                   ),
@@ -48,26 +46,15 @@ class Home extends StatelessWidget {
                 ],
               ),
             )
-            :
-              //Consumer<NonogramProvider>(builder: (ctx,data,_) => Stack(
-              //children: [
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    //mainAxisSize: MainAxisSize.min,
-                    children: [
-                      NonogramWidget(word: _nonogramProvider.nonogram.word),
-                      const WordInput()
-                    ],
-                  ),
-                ),
-                // Column(children: [
-                //   SizedBox(height: MediaQuery.of(context).size.height *0.2,),
-                //   WordsFloatingDisplay()
-                // ]) 
-              //])
-            //)
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                //mainAxisSize: MainAxisSize.min,
+                children: [
+                  NonogramWidget(word: _nonogramProvider.nonogram.word),
+                  const WordInput()
+                ],
+              ),
             ),
       ),
         );

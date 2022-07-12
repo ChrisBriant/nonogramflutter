@@ -139,13 +139,14 @@ class ResultDisplay extends StatelessWidget {
               const Text(
                 'Score: ',
                 style: TextStyle(
-                  fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               Text('${wordScore.score}')
             ],
           ),
           Container(
+            margin: const EdgeInsets.only(top:10.0),
             color: Environment().appDrawerBackgroundColor,
             child: WordListDisplay(background: Environment().appDrawerBackgroundColor, wordList: wordScore.scoredWords
           ))
