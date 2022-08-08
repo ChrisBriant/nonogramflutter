@@ -139,7 +139,7 @@ class NonogramProvider with ChangeNotifier {
       return true;
     }
 
-    return true;
+    return false;
   }
 
   addNLetterWord(int i,String word) {

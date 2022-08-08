@@ -9,7 +9,6 @@ class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
   static String routeName = '/home'; 
 
-
   @override
   Widget build(BuildContext context) {
     final _nonogramProvider = Provider.of<NonogramProvider>(context,listen: false);
@@ -20,7 +19,7 @@ class Home extends StatelessWidget {
         child: FutureBuilder<Nonogram?>(
           future: _nonogramProvider.getNonogram(),
           builder: (ctx,sn) => sn.connectionState == ConnectionState.waiting
-            ? Center(child: Container(child: const CircularProgressIndicator()))
+            ? Container(height: 300,child: Center(child: const CircularProgressIndicator()))
             : sn.hasError
             ? Padding(
               padding: const EdgeInsets.all(10.0),
