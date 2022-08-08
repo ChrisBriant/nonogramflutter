@@ -20,7 +20,7 @@ class Home extends StatelessWidget {
         child: FutureBuilder<Nonogram?>(
           future: _nonogramProvider.getNonogram(),
           builder: (ctx,sn) => sn.connectionState == ConnectionState.waiting
-            ? const CircularProgressIndicator()
+            ? Center(child: Container(child: const CircularProgressIndicator()))
             : sn.hasError
             ? Padding(
               padding: const EdgeInsets.all(10.0),

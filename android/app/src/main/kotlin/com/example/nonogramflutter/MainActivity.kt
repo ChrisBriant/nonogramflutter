@@ -1,4 +1,4 @@
-package com.example.nonogramflutter
+package uk.chrisbriant.nonogramflutter
 
 import io.flutter.embedding.android.FlutterActivity
 
