@@ -14,7 +14,7 @@ class WordInput extends StatefulWidget {
 
 class _WordInputState extends State<WordInput> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _inputContoller = TextEditingController();
+  final TextEditingController _inputController = TextEditingController();
   NonogramProvider? _nonogramProvider;
   Timer? _timer;
   String tempWord = '';
@@ -31,6 +31,12 @@ class _WordInputState extends State<WordInput> {
     9 : RegExp(r'\b\w{9}\b',multiLine: true),
   };
 
+
+  @override
+  void dispose() {
+    _inputController.dispose();
+    super.dispose();
+  }
 
 
 bool _checkWordInWord(String word1, String word2) {
@@ -126,7 +132,7 @@ bool _checkWordInWord(String word1, String word2) {
             child: TextFormField(
                       initialValue: null,
                       maxLines: 6,
-                      controller: _inputContoller,
+                      controller: _inputController,
                       onChanged: (value) { _readWords(value); },
                       keyboardType: TextInputType.text,
                       decoration: const InputDecoration(
@@ -138,7 +144,7 @@ bool _checkWordInWord(String word1, String word2) {
                     ),
           ),
           ElevatedButton(
-            onPressed: _nonogramProvider!.wordListEmpty ? null : _submitWords, 
+            onPressed: _nonogramProvider!.wordListEmpty || processingWordList ? null : _submitWords, 
             child: Text('Score',
               style: TextStyle(
                 color: _nonogramProvider!.wordListEmpty ? Colors.grey : Colors.white
